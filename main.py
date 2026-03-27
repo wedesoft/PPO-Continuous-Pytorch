@@ -47,7 +47,7 @@ def main():
 
     # Build Env
     env = gym.make(EnvName[opt.EnvIdex], render_mode = "human" if opt.render else None)
-    eval_env = gym.make(EnvName[opt.EnvIdex])
+    eval_env = gym.make(EnvName[opt.EnvIdex], render_mode = "human")
     opt.state_dim = env.observation_space.shape[0]
     opt.action_dim = env.action_space.shape[0]
     opt.max_action = float(env.action_space.high[0])
