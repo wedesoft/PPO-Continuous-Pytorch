@@ -22,7 +22,7 @@ parser.add_argument('--T_horizon', type=int, default=2048, help='lenth of long t
 parser.add_argument('--Distribution', type=str, default='Beta', help='Should be one of Beta ; GS_ms  ;  GS_m')
 parser.add_argument('--Max_train_steps', type=int, default=int(5e7), help='Max training steps')
 parser.add_argument('--save_interval', type=int, default=int(5e5), help='Model saving interval, in steps.')
-parser.add_argument('--eval_interval', type=int, default=int(5e3), help='Model evaluating interval, in steps.')
+parser.add_argument('--eval_interval', type=int, default=int(5e4), help='Model evaluating interval, in steps.')
 
 parser.add_argument('--gamma', type=float, default=0.99, help='Discounted Factor')
 parser.add_argument('--lambd', type=float, default=0.95, help='GAE Factor')

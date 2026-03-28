@@ -1,4 +1,5 @@
 from utils import BetaActor, GaussianActor_musigma, GaussianActor_mu, Critic
+import tqdm
 import numpy as np
 import copy
 import torch
@@ -85,7 +86,11 @@ class PPO_agent(object):
 		"""Slice long trajectopy into short trajectory and perform mini-batch PPO update"""
 		a_optim_iter_num = int(math.ceil(s.shape[0] / self.a_optim_batch_size))
 		c_optim_iter_num = int(math.ceil(s.shape[0] / self.c_optim_batch_size))
-		for i in range(self.K_epochs):
+
+		critic_loss = 0.0
+		actor_loss = 0.0
+		pbar = tqdm.tqdm(range(self.K_epochs))
+		for i in pbar:
 
 			#Shuffle the trajectory, Good for training
 			perm = np.arange(s.shape[0])
@@ -110,6 +115,7 @@ class PPO_agent(object):
 				a_loss.mean().backward()
 				torch.nn.utils.clip_grad_norm_(self.actor.parameters(), 40)
 				self.actor_optimizer.step()
+				actor_loss += a_loss.mean().item()
 
 			'''update the critic'''
 			for i in range(c_optim_iter_num):
@@ -122,6 +128,10 @@ class PPO_agent(object):
 				self.critic_optimizer.zero_grad()
 				c_loss.backward()
 				self.critic_optimizer.step()
+				critic_loss += c_loss.item()
+
+		print('critic_loss:', critic_loss / c_optim_iter_num / self.K_epochs, 'actor_loss:', actor_loss / a_optim_iter_num / self.K_epochs)
+
 
 	def put_data(self, s, a, r, s_next, logprob_a, done, dw, idx):
 		self.s_hoder[idx] = s
