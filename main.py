@@ -18,7 +18,7 @@ parser.add_argument('--Loadmodel', type=str2bool, default=False, help='Load pret
 parser.add_argument('--ModelIdex', type=int, default=100, help='which model to load')
 
 parser.add_argument('--seed', type=int, default=0, help='random seed')
-parser.add_argument('--T_horizon', type=int, default=2048, help='lenth of long trajectory')
+parser.add_argument('--T_horizon', type=int, default=256, help='lenth of long trajectory')
 parser.add_argument('--Distribution', type=str, default='Beta', help='Should be one of Beta ; GS_ms  ;  GS_m')
 parser.add_argument('--Max_train_steps', type=int, default=int(5e7), help='Max training steps')
 parser.add_argument('--save_interval', type=int, default=int(5e5), help='Model saving interval, in steps.')
