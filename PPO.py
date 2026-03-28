@@ -1,5 +1,4 @@
 from utils import BetaActor, GaussianActor_musigma, GaussianActor_mu, Critic
-import tqdm
 import numpy as np
 import copy
 import torch
@@ -89,8 +88,7 @@ class PPO_agent(object):
 
 		critic_loss = 0.0
 		actor_loss = 0.0
-		pbar = tqdm.tqdm(range(self.K_epochs))
-		for i in pbar:
+		for i in range(self.K_epochs):
 
 			#Shuffle the trajectory, Good for training
 			perm = np.arange(s.shape[0])
