@@ -122,7 +122,7 @@ def Action_adapter(a,max_action):
 def Reward_adapter(r, EnvIdex):
 	# For BipedalWalker
 	if EnvIdex == 0 or EnvIdex == 1:
-		if r <= -100: r = -1
+		if r <= -100: r = -100
 	# For Pendulum-v0
 	elif EnvIdex == 3:
 		r = (r + 8) / 8
